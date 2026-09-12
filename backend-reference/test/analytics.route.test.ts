@@ -14,7 +14,6 @@ describe('POST /api/analytics/event', () => {
     analyticsFile = path.join(tmpDir, 'analytics.jsonl');
     process.env.ANALYTICS_FILE = analyticsFile;
     jest.resetModules();
-    // eslint-disable-next-line @typescript-eslint/no-var-requires
     app = require('../src/app').createApp();
   });
 

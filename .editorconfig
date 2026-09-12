@@ -1,0 +1,28 @@
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+indent_style = space
+indent_size = 4
+
+[*.{kt,kts}]
+indent_size = 4
+max_line_length = 120
+ktlint_standard_no-wildcard-imports = enabled
+
+# Test fixture JSON/string literals are often long and shouldn't be wrapped
+# just to satisfy a line-length rule.
+[**/src/test/**/*.kt]
+ktlint_standard_max-line-length = disabled
+
+[*.{ts,js,json,yml,yaml}]
+indent_size = 2
+
+[*.md]
+trim_trailing_whitespace = false
+
+[*.{bat,ps1}]
+end_of_line = crlf

@@ -5,9 +5,10 @@ plugins {
 android {
     namespace = "com.nerojust.ota.install"
     compileSdk {
-        version = release(37) {
-            minorApiLevel = 1
-        }
+        version =
+            release(37) {
+                minorApiLevel = 1
+            }
     }
 
     defaultConfig {

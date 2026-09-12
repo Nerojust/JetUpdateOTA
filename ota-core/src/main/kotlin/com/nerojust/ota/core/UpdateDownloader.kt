@@ -5,5 +5,8 @@ import kotlinx.coroutines.flow.Flow
 import java.io.File
 
 interface UpdateDownloader {
-    fun download(manifest: UpdateManifest, targetDir: File): Flow<DownloadProgress>
+    fun download(
+        manifest: UpdateManifest,
+        targetDir: File,
+    ): Flow<DownloadProgress>
 }

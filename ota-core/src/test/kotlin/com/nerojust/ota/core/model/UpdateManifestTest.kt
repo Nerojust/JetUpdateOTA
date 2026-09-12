@@ -6,12 +6,12 @@ import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
 class UpdateManifestTest {
-
     private val json = Json { ignoreUnknownKeys = true }
 
     @Test
     fun `decodes snake_case backend json into UpdateManifest`() {
-        val body = """
+        val body =
+            """
             {
               "version_code": 2,
               "version_name": "1.1.0",
@@ -24,7 +24,7 @@ class UpdateManifestTest {
               "minimum_version_code": 1,
               "release_date": 1234567890
             }
-        """.trimIndent()
+            """.trimIndent()
 
         val manifest = json.decodeFromString<UpdateManifest>(body)
 
@@ -37,7 +37,8 @@ class UpdateManifestTest {
 
     @Test
     fun `applies defaults for optional fields`() {
-        val body = """
+        val body =
+            """
             {
               "version_code": 1,
               "version_name": "1.0.0",
@@ -45,7 +46,7 @@ class UpdateManifestTest {
               "checksum": "abc123",
               "file_size": 1000
             }
-        """.trimIndent()
+            """.trimIndent()
 
         val manifest = json.decodeFromString<UpdateManifest>(body)
 

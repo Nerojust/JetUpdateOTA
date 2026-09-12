@@ -5,7 +5,6 @@ import org.junit.jupiter.api.Assertions.assertThrows
 import org.junit.jupiter.api.Test
 
 class OTAConfigTest {
-
     @Test
     fun `accepts an https manifest url`() {
         val config = OTAConfig(manifestUrl = "https://example.com/api/update-manifest")

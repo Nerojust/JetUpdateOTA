@@ -29,28 +29,35 @@ class HttpUpdateChecker(
     private val httpClient: OkHttpClient,
     private val manifestUrl: String,
 ) : UpdateChecker {
-
-    override suspend fun fetchAndEvaluate(currentVersionCode: Int, deviceId: String): UpdateCheckResult =
+    override suspend fun fetchAndEvaluate(
+        currentVersionCode: Int,
+        deviceId: String,
+    ): UpdateCheckResult =
         withContext(Dispatchers.IO) {
             try {
-                val url = manifestUrl.toHttpUrl().newBuilder()
-                    .addQueryParameter("app_version", currentVersionCode.toString())
-                    .addQueryParameter("device_id", deviceId)
-                    .build()
+                val url =
+                    manifestUrl.toHttpUrl().newBuilder()
+                        .addQueryParameter("app_version", currentVersionCode.toString())
+                        .addQueryParameter("device_id", deviceId)
+                        .build()
                 val request = Request.Builder().url(url).build()
                 httpClient.newCall(request).execute().use { response ->
                     if (!response.isSuccessful) {
                         return@withContext UpdateCheckResult.Failed(
-                            OTAException.NetworkError(IOException("HTTP ${response.code}"))
+                            OTAException.NetworkError(IOException("HTTP ${response.code}")),
                         )
                     }
-                    val body = response.body?.string()
-                        ?: return@withContext UpdateCheckResult.Failed(
-                            OTAException.NetworkError(IOException("Empty response body"))
-                        )
+                    val body =
+                        response.body?.string()
+                            ?: return@withContext UpdateCheckResult.Failed(
+                                OTAException.NetworkError(IOException("Empty response body")),
+                            )
                     val envelope = json.decodeFromString<ManifestEnvelope>(body)
                     when {
-                        envelope.hasUpdate && envelope.manifest != null -> UpdateCheckResult.Available(envelope.manifest)
+                        envelope.hasUpdate && envelope.manifest != null ->
+                            UpdateCheckResult.Available(
+                                envelope.manifest,
+                            )
                         envelope.reason == "not_in_rollout" -> UpdateCheckResult.NotInRollout
                         else -> UpdateCheckResult.UpToDate
                     }
@@ -63,5 +70,7 @@ class HttpUpdateChecker(
         }
 }
 
-fun defaultUpdateChecker(httpClient: OkHttpClient, manifestUrl: String): UpdateChecker =
-    HttpUpdateChecker(httpClient, manifestUrl)
+fun defaultUpdateChecker(
+    httpClient: OkHttpClient,
+    manifestUrl: String,
+): UpdateChecker = HttpUpdateChecker(httpClient, manifestUrl)

@@ -8,5 +8,8 @@ import kotlinx.coroutines.flow.asFlow
 import java.io.File
 
 class FakeUpdateDownloader(private val emissions: List<DownloadProgress>) : UpdateDownloader {
-    override fun download(manifest: UpdateManifest, targetDir: File): Flow<DownloadProgress> = emissions.asFlow()
+    override fun download(
+        manifest: UpdateManifest,
+        targetDir: File,
+    ): Flow<DownloadProgress> = emissions.asFlow()
 }

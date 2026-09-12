@@ -28,7 +28,6 @@ describe('GET /api/update-manifest', () => {
     );
     process.env.MANIFEST_FILE = manifestFile;
     jest.resetModules();
-    // eslint-disable-next-line @typescript-eslint/no-var-requires
     app = require('../src/app').createApp();
   });
 

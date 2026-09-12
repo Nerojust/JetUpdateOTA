@@ -12,20 +12,27 @@ class OTAManager(
     private val installer: UpdateInstaller,
     private val stateStore: UpdateStateStore,
 ) {
-    suspend fun checkForUpdate(currentVersionCode: Int, deviceId: String): UpdateCheckResult {
+    suspend fun checkForUpdate(
+        currentVersionCode: Int,
+        deviceId: String,
+    ): UpdateCheckResult {
         val result = checker.fetchAndEvaluate(currentVersionCode, deviceId)
         val now = System.currentTimeMillis()
         val currentState = stateStore.currentState()
-        val pendingVersionCode = if (result is UpdateCheckResult.Available) {
-            result.manifest.versionCode
-        } else {
-            currentState.pendingVersionCode
-        }
+        val pendingVersionCode =
+            if (result is UpdateCheckResult.Available) {
+                result.manifest.versionCode
+            } else {
+                currentState.pendingVersionCode
+            }
         stateStore.update(currentState.copy(lastCheckTimeMillis = now, pendingVersionCode = pendingVersionCode))
         return result
     }
 
-    fun downloadUpdate(manifest: UpdateManifest, targetDir: File): Flow<DownloadProgress> =
+    fun downloadUpdate(
+        manifest: UpdateManifest,
+        targetDir: File,
+    ): Flow<DownloadProgress> =
         downloader.download(manifest, targetDir).onEach { progress ->
             if (progress is DownloadProgress.Complete) {
                 val currentState = stateStore.currentState()
