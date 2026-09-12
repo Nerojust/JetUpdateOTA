@@ -23,10 +23,10 @@ jobs:
       - name: Collect library artifacts
         run: |
           mkdir -p release-artifacts
-          cp ota-core/build/libs/*.jar release-artifacts/ota-core.jar
-          cp ota-network/build/libs/*.jar release-artifacts/ota-network.jar
-          cp ota-download/build/libs/*.jar release-artifacts/ota-download.jar
-          cp ota-testing/build/libs/*.jar release-artifacts/ota-testing.jar
+          cp ota-core/build/libs/ota-core.jar release-artifacts/ota-core.jar
+          cp ota-network/build/libs/ota-network.jar release-artifacts/ota-network.jar
+          cp ota-download/build/libs/ota-download.jar release-artifacts/ota-download.jar
+          cp ota-testing/build/libs/ota-testing.jar release-artifacts/ota-testing.jar
           cp ota-install/build/outputs/aar/ota-install-release.aar release-artifacts/ota-install.aar
       - uses: actions/upload-artifact@v4
         with:
