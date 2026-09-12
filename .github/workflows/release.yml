@@ -1,0 +1,73 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+
+permissions:
+  contents: write
+
+jobs:
+  build-android:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - run: ./gradlew test ktlintCheck
+      - run: ./gradlew :ota-core:assemble :ota-network:assemble :ota-download:assemble :ota-testing:assemble
+      - run: ./gradlew :ota-install:assembleRelease
+      - name: Collect library artifacts
+        run: |
+          mkdir -p release-artifacts
+          cp ota-core/build/libs/*.jar release-artifacts/ota-core.jar
+          cp ota-network/build/libs/*.jar release-artifacts/ota-network.jar
+          cp ota-download/build/libs/*.jar release-artifacts/ota-download.jar
+          cp ota-testing/build/libs/*.jar release-artifacts/ota-testing.jar
+          cp ota-install/build/outputs/aar/ota-install-release.aar release-artifacts/ota-install.aar
+      - uses: actions/upload-artifact@v4
+        with:
+          name: android-libraries
+          path: release-artifacts/
+
+  build-backend:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: backend-reference
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - run: npm ci
+      - run: npm run lint
+      - run: npm test
+      - run: npm run build
+      - run: |
+          mkdir -p ../release-artifacts
+          zip -r ../release-artifacts/backend-reference.zip dist package.json package-lock.json Dockerfile docker-compose.yml .env.example data storage
+      - uses: actions/upload-artifact@v4
+        with:
+          name: backend-reference
+          path: release-artifacts/backend-reference.zip
+
+  release:
+    needs: [build-android, build-backend]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: android-libraries
+          path: release-artifacts
+      - uses: actions/download-artifact@v4
+        with:
+          name: backend-reference
+          path: release-artifacts
+      - uses: softprops/action-gh-release@v2
+        with:
+          generate_release_notes: true
+          files: release-artifacts/*
