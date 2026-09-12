@@ -17,6 +17,7 @@ mockk = "1.13.13"
 turbine = "1.2.0"
 robolectric = "4.14.1"
 ktlint = "12.1.2"
+mavenPublish = "0.30.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -51,3 +52,4 @@ android-library = { id = "com.android.library", version.ref = "agp" }
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 ktlint = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "ktlint" }
+maven-publish = { id = "com.vanniktech.maven.publish", version.ref = "mavenPublish" }

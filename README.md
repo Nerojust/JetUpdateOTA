@@ -30,14 +30,26 @@ you can just use it.
 
 ### 1. Add it to your project
 
-Not on Maven Central yet — that's on the to-do list. For now, add it as
-a Gradle composite build:
+Once a version is published (see [PUBLISHING.md](PUBLISHING.md) — not
+live yet, it needs a one-time account setup first), add the modules you
+need:
+
+```kotlin
+dependencies {
+    implementation("io.github.nerojust:ota-core:0.1.0")
+    implementation("io.github.nerojust:ota-network:0.1.0")
+    implementation("io.github.nerojust:ota-download:0.1.0")
+    implementation("io.github.nerojust:ota-install:0.1.0")
+}
+```
+
+Until then, add it as a Gradle composite build instead:
 
 ```kotlin
 // settings.gradle.kts
 includeBuild("../JetUpdateOTA") {
     dependencySubstitution {
-        substitute(module("com.nerojust:ota-core")).using(project(":ota-core"))
+        substitute(module("io.github.nerojust:ota-core")).using(project(":ota-core"))
         // add the other ota-* modules the same way
     }
 }
