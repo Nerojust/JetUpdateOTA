@@ -1,0 +1,19 @@
+*.iml
+.gradle
+/local.properties
+.idea/
+.DS_Store
+/build
+/captures
+.externalNativeBuild
+.cxx
+local.properties
+
+# Node (backend-reference)
+node_modules/
+dist/
+*.log
+
+# Claude Code / agent tooling (local only, never publish)
+.claude/
+.superpowers/
