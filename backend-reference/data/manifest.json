@@ -1,0 +1,11 @@
+{
+  "version_code": 1,
+  "version_name": "1.0.0",
+  "apk_url": "https://example.com/storage/app-v1.apk",
+  "checksum": "0000000000000000000000000000000000000000000000000000000000000000",
+  "file_size": 0,
+  "force_update": false,
+  "rollout_percentage": 100,
+  "minimum_version_code": 1,
+  "release_date": 0
+}

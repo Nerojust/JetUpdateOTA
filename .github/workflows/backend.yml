@@ -1,0 +1,24 @@
+name: Backend
+
+on:
+  push:
+    paths:
+      - 'backend-reference/**'
+  pull_request:
+    paths:
+      - 'backend-reference/**'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: backend-reference
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - run: npm ci
+      - run: npm run build
+      - run: npm test
