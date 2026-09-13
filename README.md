@@ -2,7 +2,7 @@
 
 [![Android CI](https://github.com/nerojust/JetUpdateOTA/actions/workflows/android.yml/badge.svg)](https://github.com/nerojust/JetUpdateOTA/actions/workflows/android.yml)
 [![Backend CI](https://github.com/nerojust/JetUpdateOTA/actions/workflows/backend.yml/badge.svg)](https://github.com/nerojust/JetUpdateOTA/actions/workflows/backend.yml)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![License: Apache 2.0](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
 [![Kotlin](https://img.shields.io/badge/Kotlin-2.2.10-7F52FF.svg)](https://kotlinlang.org)
 [![Maven Central](https://img.shields.io/maven-central/v/io.github.nerojust/ota-core.svg)](https://central.sonatype.com/namespace/io.github.nerojust)
 
@@ -184,6 +184,4 @@ that privately instead of opening a public issue.
 
 ## License
 
-MIT — see [LICENSE](LICENSE). (`0.1.0` was released under Apache 2.0 and
-remains so permanently on Maven Central, since published artifacts are
-immutable; every version after that is MIT.)
+Apache 2.0 — see [LICENSE](LICENSE).
