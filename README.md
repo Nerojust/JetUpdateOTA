@@ -4,7 +4,7 @@
 [![Backend CI](https://github.com/nerojust/JetUpdateOTA/actions/workflows/backend.yml/badge.svg)](https://github.com/nerojust/JetUpdateOTA/actions/workflows/backend.yml)
 [![License: Apache 2.0](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
 [![Kotlin](https://img.shields.io/badge/Kotlin-2.2.10-7F52FF.svg)](https://kotlinlang.org)
-[![Maven Central](https://img.shields.io/maven-central/v/io.github.nerojust/ota-core.svg)](https://central.sonatype.com/namespace/io.github.nerojust)
+[![Maven Central](https://img.shields.io/maven-central/v/io.github.nerojust/ota-core.svg)](https://central.sonatype.com/artifact/io.github.nerojust/ota-core)
 
 A Kotlin library that lets your Android app update itself — no Play
 Store needed. It checks for a new version, downloads it, makes sure the
