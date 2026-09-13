@@ -8,11 +8,6 @@ does not yet follow strict semver (pre-1.0).
 
 ### Planned
 
-- Actually publishing to Maven Central. The Gradle-side setup is done
-  (`com.vanniktech.maven.publish` on all five `ota-*` modules,
-  `io.github.nerojust` coordinates, a CI job ready to run) — see
-  [PUBLISHING.md](PUBLISHING.md) for the one-time account/signing-key
-  setup that's still needed before the first real release.
 - A real install-completion signal (`BroadcastReceiver` for
   `PackageInstaller` session status) and a corresponding state-reset
   path — currently `pendingVersionCode`/`downloadedApkPath` are never
@@ -25,6 +20,8 @@ does not yet follow strict semver (pre-1.0).
 - Example app update-checking UI.
 
 ## [0.1.0] - 2026-09-12
+
+Published to Maven Central under `io.github.nerojust`.
 
 ### Added
 

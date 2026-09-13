@@ -4,6 +4,7 @@
 [![Backend CI](https://github.com/nerojust/JetUpdateOTA/actions/workflows/backend.yml/badge.svg)](https://github.com/nerojust/JetUpdateOTA/actions/workflows/backend.yml)
 [![License: Apache 2.0](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
 [![Kotlin](https://img.shields.io/badge/Kotlin-2.2.10-7F52FF.svg)](https://kotlinlang.org)
+[![Maven Central](https://img.shields.io/maven-central/v/io.github.nerojust/ota-core.svg)](https://central.sonatype.com/namespace/io.github.nerojust)
 
 A Kotlin library that lets your Android app update itself — no Play
 Store needed. It checks for a new version, downloads it, makes sure the
@@ -30,9 +31,7 @@ you can just use it.
 
 ### 1. Add it to your project
 
-Once a version is published (see [PUBLISHING.md](PUBLISHING.md) — not
-live yet, it needs a one-time account setup first), add the modules you
-need:
+Published on Maven Central under `io.github.nerojust`:
 
 ```kotlin
 dependencies {
@@ -40,10 +39,15 @@ dependencies {
     implementation("io.github.nerojust:ota-network:0.1.0")
     implementation("io.github.nerojust:ota-download:0.1.0")
     implementation("io.github.nerojust:ota-install:0.1.0")
+    implementation("com.squareup.okhttp3:okhttp:4.12.0") // bring your own client
 }
 ```
 
-Until then, add it as a Gradle composite build instead:
+(`ota-testing`, with fakes for your own tests, is published too:
+`io.github.nerojust:ota-testing:0.1.0`, add it as `testImplementation`.)
+
+Prefer working against the source directly (e.g. to try an unreleased
+change)? Use a Gradle composite build instead:
 
 ```kotlin
 // settings.gradle.kts
@@ -55,17 +59,8 @@ includeBuild("../JetUpdateOTA") {
 }
 ```
 
-Then, in your app's `build.gradle.kts`:
-
-```kotlin
-dependencies {
-    implementation(project(":ota-core"))
-    implementation(project(":ota-network"))
-    implementation(project(":ota-download"))
-    implementation(project(":ota-install"))
-    implementation(libs.okhttp)
-}
-```
+with the same `implementation(project(":ota-core"))`-style dependencies
+in your app's `build.gradle.kts` in place of the Maven coordinates above.
 
 ### 2. Update your AndroidManifest.xml
 
@@ -167,10 +162,10 @@ A few honest notes before you rely on this:
 - **Every update is checked before it's installed.** If the file doesn't
   match the app that's already on the phone, it's rejected. No
   exceptions, no settings to turn this off.
-- **This is a starting point, not a finished product.** No Maven
-  Central release yet, no "Check for updates" button in the demo app,
-  and the demo backend has no login system — it's meant for trying
-  things out, not for running as-is in production.
+- **This is a starting point, not a finished product.** No "Check for
+  updates" button in the demo app yet, and the demo backend has no
+  login system — it's meant for trying things out, not for running
+  as-is in production.
 
 Everything above is also tracked in [CHANGELOG.md](CHANGELOG.md).
 
