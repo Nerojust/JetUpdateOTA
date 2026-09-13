@@ -56,8 +56,8 @@ mavenPublishing {
         url.set("https://github.com/nerojust/JetUpdateOTA")
         licenses {
             license {
-                name.set("The Apache License, Version 2.0")
-                url.set("https://www.apache.org/licenses/LICENSE-2.0.txt")
+                name.set("MIT")
+                url.set("https://opensource.org/licenses/MIT")
             }
         }
         developers {
